@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DataLayer
 {
@@ -23,7 +24,7 @@ namespace DataLayer
 
         public List<Contact> GetAll()
         {
-            throw new NotImplementedException();
+            return this.db.Query<Contact>("SELECT * FROM Contacts").ToList();
         }
 
         public void Remove(int id)

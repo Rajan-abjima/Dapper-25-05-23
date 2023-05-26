@@ -4,12 +4,14 @@ using System.Diagnostics;
 
 namespace Runner
 {
-    internal class Program
+    class Program
     {
         private static IConfigurationRoot config;
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Initialize();
+
+            Get_all_should_return_6_results();
         }
 
         static void Get_all_should_return_6_results()
@@ -36,7 +38,7 @@ namespace Runner
 
         private static IContactRepository CreateRepository()
         {
-            return new ContactRepository (config.GetConnectionString("DefaultConnection"));
+           return new ContactRepository (config.GetConnectionString("DefaultConnection"));
         }
     }
 }
