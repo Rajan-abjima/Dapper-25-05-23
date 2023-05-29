@@ -19,11 +19,11 @@ public class StudentData : IStudentData
     public Task<IEnumerable<StudentModel>> GetStudents() =>
         _db.LoadData<StudentModel, dynamic>(storedProcedure: "dbo.spStudent_GetAll", new { });
 
-    public async Task<StudentModel?> GetStudent(int rollNo)
+    public async Task<StudentModel?> GetStudent(int RollNo)
     {
         var results = await _db.LoadData<StudentModel, dynamic>(
             storedProcedure: "dbo.spStudent_Get",
-            new { RollNo = rollNo });
+            new { RollNo = RollNo });
         return results.FirstOrDefault();
     }
 
@@ -34,6 +34,6 @@ public class StudentData : IStudentData
     public Task UpdateStudent(StudentModel student) =>
         _db.SaveData(storedProcedure: "dbo.spStudent_Update", student);
 
-    public Task DeleteStudent(int id) =>
-        _db.SaveData(storedProcedure: "dbo.spStudent_Delete", new { Id = id });
+    public Task DeleteStudent(int rollNo) =>
+        _db.SaveData(storedProcedure: "dbo.spStudent_Delete", new { RollNo= rollNo });
 }
