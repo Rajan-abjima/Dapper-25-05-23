@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dapper.Application.Interfaces;
-public interface IStudentRepository : IGenericRepository<Student>
+public interface IStudentRepository : ILoadRepository<Student>, ISaveRepository<StudentWithT>
 {
 }

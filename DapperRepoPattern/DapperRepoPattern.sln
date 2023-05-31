@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperStudnets", "DapperStudnets\DapperStudnets.csproj", "{CB2118A2-9D4F-4A5D-A9B8-EC40B03D7555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperStudnets", "DapperStudnets\DapperStudnets.csproj", "{CB2118A2-9D4F-4A5D-A9B8-EC40B03D7555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.Core", "Dapper.Core\Dapper.Core.csproj", "{3D8465B3-3615-4F6A-A06E-AD4E470B1B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.Core", "Dapper.Core\Dapper.Core.csproj", "{3D8465B3-3615-4F6A-A06E-AD4E470B1B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.Application", "Dapper.Application\Dapper.Application.csproj", "{3FCDA9FC-D895-47CA-A163-F988B40B08CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.Application", "Dapper.Application\Dapper.Application.csproj", "{3FCDA9FC-D895-47CA-A163-F988B40B08CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.Infrastructure", "Dapper.Infrastructure\Dapper.Infrastructure.csproj", "{12A661DA-871B-4F5D-8590-67FA201A5814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.Infrastructure", "Dapper.Infrastructure\Dapper.Infrastructure.csproj", "{12A661DA-871B-4F5D-8590-67FA201A5814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

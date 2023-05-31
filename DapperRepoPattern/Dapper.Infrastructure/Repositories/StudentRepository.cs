@@ -1,12 +1,8 @@
 ﻿using Dapper.Application.Interfaces;
 using Dapper.Core.Entities;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dapper.Infrastructure.Repositories;
 public class StudentRepository : IStudentRepository
@@ -20,57 +16,57 @@ public class StudentRepository : IStudentRepository
     
     public async Task<IReadOnlyList<Student>> GetAllAsync()
     {
-        var students = "SELECT * FROM StudentRecords";
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             connection.Open();
-            var records = await connection.QueryAsync<Student>(students);
+            var records = await connection.QueryAsync<Student>
+                ("spStudents_GetAll", new { }, commandType: CommandType.StoredProcedure);
             return records.ToList();
         }
 
     }
     public async Task<Student> GetByIdAsync(int rollNo)
-    {
-        var student = "SELECT * FROM StudentRecords WHERE RollNo = @RollNo";
+    {        
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             connection.Open();
             var record = await connection.QuerySingleOrDefaultAsync<Student>
-                (student, new { RollNo = rollNo });
+                ("spStudents_Get", new { RollNo = rollNo }, commandType: CommandType.StoredProcedure);
             return record;
         }
     }
-    public async Task<int> AddAsync(Student student)
+    public async Task<int> AddAsync(StudentWithT student)
     {
-        var newStudent = "INSERT INTO StudentRecords (Name, FamilyName, Address, Contact) VALUES (@Name, @FamilyName, @Address, @Contact)";
+        student.AddedOn = DateTime.Now;
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             connection.Open();
-            var newRecord = await connection.ExecuteAsync(newStudent, student);
+            var newRecord = await connection.ExecuteAsync
+                ("spStudent_Insert",
+                new {student.Name, student.FamilyName, student.Address, student.Contact, student.AddedOn}, 
+                commandType: CommandType.StoredProcedure);
             return newRecord;
         }
     }
-    public async Task<int> UpdateAsync(Student student)
+    public async Task<int> UpdateAsync(StudentWithT student)
     {
-        var updateStudent =
-            "UPDATE StudentRecords SET Name = @Name, FamilyName = @FamilyName, Address = @Address, Contact = @Contact WHERE RollNo = @RollNo";
+        student.ModifiedOn = DateTime.Now;
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             connection.Open();
-            var updatedRecord = await connection.ExecuteAsync(updateStudent, student);
+            var updatedRecord = await connection.ExecuteAsync
+                ("spStudent_Update", student, commandType: CommandType.StoredProcedure);
             return updatedRecord;
         }
     }
     public async Task<int> DeleteAsync(int rollNo)
     {
-        var removingStudent = "DELETE FROM StudentRecords WHERE RollNo = @RollNo";
         using(var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             connection.Open();
-            var changedRecord = await connection.ExecuteAsync(removingStudent, new {RollNo = rollNo});
+            var changedRecord = await connection.ExecuteAsync
+                ("spStudent_Delete", new {RollNo = rollNo}, commandType: CommandType.StoredProcedure);
             return changedRecord;
         }
-
     }
-
 }

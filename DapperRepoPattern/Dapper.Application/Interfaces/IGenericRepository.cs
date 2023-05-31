@@ -5,10 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dapper.Application.Interfaces;
-public interface IGenericRepository<T> where T : class
+public interface ILoadRepository<T> where T : class
 {
     Task<T> GetByIdAsync(int id);
     Task<IReadOnlyList<T>> GetAllAsync();
+
+}
+
+
+
+public interface ISaveRepository<T> where T : class
+{
     Task<int> AddAsync (T entity);
     Task<int> UpdateAsync (T entity);
     Task<int> DeleteAsync (int id);

@@ -31,14 +31,14 @@ public class StudentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddNewStudent(Student student)
+    public async Task<IActionResult> AddNewStudent(StudentWithT student)
     {
         var result = await _studentRepository.AddAsync(student);
         return Ok(result);
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateStudent(Student student)
+    public async Task<IActionResult> UpdateStudent(StudentWithT student)
     {
         var result = await _studentRepository.UpdateAsync(student);
         return Ok(result);
